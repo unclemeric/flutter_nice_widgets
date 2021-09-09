@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_nice_widgets: 
     path: ../
+  webview_flutter: ^2.0.12
 
 dev_dependencies:
   flutter_test:
