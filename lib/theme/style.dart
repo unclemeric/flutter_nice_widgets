@@ -182,7 +182,7 @@ class Style {
   static const buttonHairBorderWidth = borderWidthHair;
   static const buttonBorderRadius = borderRadiusSm;
   static const buttonRoundBorderRadius = borderRadiusMax;
-  static const buttonPlainBackgroundColor = white;
+  static const buttonPlainBackgroundColor = Colors.transparent;
   static const buttonDisabledOpacity = disabledOpacity;
 
   // Calendar
@@ -448,7 +448,7 @@ class Style {
   static const listTextHeight = 50.0;
 
   // Loading
-  static const loadingTextColor = gray6;
+  static const loadingTextColor = gray8;
   static const loadingTextFontSize = fontSizeMd;
   static const loadingSpinnerColor = blue;
   static const loadingSpinnerBackgroundColor = gray5;

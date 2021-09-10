@@ -67,6 +67,8 @@ class NButton extends StatelessWidget {
   // 自定义按钮圆角
   final BorderRadius? borderRadius;
 
+  final bool hasBorder;
+
   // 点击后回调
   final Function()? onTap;
 
@@ -80,6 +82,7 @@ class NButton extends StatelessWidget {
       this.color,
       this.textColor,
       this.icon,
+      this.hasBorder: true,
       this.block: false,
       this.plain: false,
       this.square: false,
@@ -193,7 +196,7 @@ class NButton extends StatelessWidget {
     Color? buttonColor;
 
     borderColor =
-        color is Gradient ? null : (color ?? colors[type]["borderColor"]);
+        color is Gradient ? null : (this.hasBorder ? color ?? colors[type]["borderColor"] : Colors.transparent);
     buttonColor = color is Gradient
         ? null
         : plain

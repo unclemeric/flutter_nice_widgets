@@ -23,3 +23,5 @@ export './widgets/steps.dart';
 export './widgets/skeleton.dart';
 export './widgets/swipe.dart';
 export './widgets/tag.dart';
+export './widgets/webveiw.dart';
+export './widgets/contacts.dart';

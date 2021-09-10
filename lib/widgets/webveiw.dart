@@ -6,11 +6,12 @@
 
 import 'dart:async';
 import 'dart:io';
-import 'package:example/utils/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_nice_widgets/flutter_nice_widgets.dart';
+import 'package:flutter_nice_widgets/utils/webview_utils.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class WebViewExample extends StatefulWidget {
+class NWebView extends StatefulWidget {
   final String url;
   final Function(WebViewController webViewController)? onWebViewCreated;
   final Function(int progress)? onProgress;
@@ -19,7 +20,7 @@ class WebViewExample extends StatefulWidget {
   final Function(String url)? onPageStarted;
   final Function(String url)? onPageFinished;
   final bool gestureNavigationEnabled;
-  const WebViewExample(
+  const NWebView(
       {Key? key,
       required this.url,
       this.gestureNavigationEnabled: true,
@@ -32,13 +33,13 @@ class WebViewExample extends StatefulWidget {
       : super(key: key);
 
   @override
-  _WebViewExampleState createState() => _WebViewExampleState();
+  _NWebViewState createState() => _NWebViewState();
 }
 
-class _WebViewExampleState extends State<WebViewExample> {
+class _NWebViewState extends State<NWebView> {
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
-  String _title = '';
+  String _title = '正在加载...';
   @override
   void initState() {
     super.initState();
@@ -69,7 +70,11 @@ class _WebViewExampleState extends State<WebViewExample> {
         title: Text(_title),
         leading: NavigationControls(_controller.future),
         actions: <Widget>[
-          SampleMenu(_controller.future),
+          // SampleMenu(_controller.future),
+          // IconButton(onPressed: (){
+          //   controller.reload();
+          // }, icon: Icon(Icons.refresh)),
+          RightControls(_controller.future),
         ],
       ),
       body: Builder(builder: (BuildContext context) {
@@ -135,50 +140,33 @@ class _WebViewExampleState extends State<WebViewExample> {
   }
 }
 
-enum MenuOptions {
-  clearCookies,
-  clearCache,
-  navigationDelegate,
-}
+class RightControls extends StatelessWidget {
+  const RightControls(this._webViewControllerFuture);
 
-class SampleMenu extends StatelessWidget {
-  SampleMenu(this.controller);
-
-  final Future<WebViewController> controller;
-  final CookieManager cookieManager = CookieManager();
+  final Future<WebViewController> _webViewControllerFuture;
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<WebViewController>(
-      future: controller,
+      future: _webViewControllerFuture,
       builder:
-          (BuildContext context, AsyncSnapshot<WebViewController> controller) {
-        return PopupMenuButton<MenuOptions>(
-          onSelected: (MenuOptions value) {
-            switch (value) {
-              case MenuOptions.clearCookies:
-                WebviewUtils.clearCookies(context);
-                break;
-              case MenuOptions.clearCache:
-                WebviewUtils.clearCache(controller.data!, context);
-                break;
-              case MenuOptions.navigationDelegate:
-                WebviewUtils.webviewNavigationDelegate(controller.data!, context);
-                break;
-            }
-          },
-          itemBuilder: (BuildContext context) => <PopupMenuItem<MenuOptions>>[
-            const PopupMenuItem<MenuOptions>(
-              value: MenuOptions.clearCookies,
-              child: Text('清除cookies'),
-            ),
-            const PopupMenuItem<MenuOptions>(
-              value: MenuOptions.clearCache,
-              child: Text('清除缓存'),
-            ),
-            const PopupMenuItem<MenuOptions>(
-              value: MenuOptions.navigationDelegate,
-              child: Text('导航代理'),
+          (BuildContext context, AsyncSnapshot<WebViewController> snapshot) {
+        final bool webViewReady =
+            snapshot.connectionState == ConnectionState.done;
+        final WebViewController controller = snapshot.data!;
+        return Row(
+          children: <Widget>[
+            NButton(
+              type: NButtonType.Default,
+              plain: true,
+              text: '刷新',
+              textColor: Colors.white,
+              hasBorder: false,
+              onTap: !webViewReady
+                  ? null
+                  : () {
+                      controller.reload();
+                    },
             ),
           ],
         );
@@ -210,13 +198,17 @@ class NavigationControls extends StatelessWidget {
               onPressed: !webViewReady
                   ? null
                   : () async {
-                      if (await controller.canGoBack()) {
-                        await controller.goBack();
-                      } else {
-                        if (Navigator.canPop(context)) {
-                          Navigator.pop(context);
+                      try {
+                        if (await controller.canGoBack()) {
+                          await controller.goBack();
+                        } else {
+                          if (Navigator.canPop(context)) {
+                            Navigator.pop(context);
+                          }
+                          return;
                         }
-                        return;
+                      } catch (e) {
+                        Navigator.pop(context);
                       }
                     },
             ),

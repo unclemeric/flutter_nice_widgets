@@ -1,6 +1,7 @@
 import 'package:example/pages/actionSheet.dart';
 import 'package:example/pages/checkbox.dart';
 import 'package:example/pages/button.dart';
+import 'package:example/pages/conctact.dart';
 import 'package:example/pages/datetime_picker.dart';
 import 'package:example/pages/imagePreview.dart';
 import 'package:example/pages/passwordInput.dart';
@@ -15,7 +16,6 @@ import 'package:example/pages/steps.dart';
 import 'package:example/pages/divider.dart';
 import 'package:example/pages/radio.dart';
 import 'package:example/pages/take_photo.dart';
-import 'package:example/pages/webveiw.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nice_widgets/flutter_nice_widgets.dart';
 
@@ -37,7 +37,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<MenuItem> items = [
-      MenuItem("webview", WebViewExample(url: 'https://www.hwagain.cn/hwagain/apk/html-test/#/supplierRegistration'),),
+      MenuItem("webview", NWebView(url: 'https://www.hwagain.cn/hwagain/apk/html-test/#/supplierRegistration'),),
+      MenuItem("通讯录", NConcatPage()),
       MenuItem("按钮", DemoButton(title: '按钮',),),
       MenuItem("复选框", CheckboxPage(title: '复选框',),),
       MenuItem("单选框", RadioPage(title: '单选框',),),
