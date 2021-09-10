@@ -53,9 +53,10 @@ class _NWebViewState extends State<NWebView> {
     Future.delayed(const Duration(milliseconds: 500), () async {
       String title =
           await webViewController.evaluateJavascript("document.title");
-      if (title.length > 2) {
+      title = title.replaceAll("\"", ""); // 安卓获取的标题自带双引号需要手动去除，ios没这个问题
+      if (title.isNotEmpty) {
         this.setState(() {
-          this._title = title.substring(1, title.length - 1);
+          this._title = title;
         });
       } else {
         this._getTitleFromPage(webViewController);
