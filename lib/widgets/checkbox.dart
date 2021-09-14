@@ -11,6 +11,10 @@ class NCheckbox extends StatefulWidget {
   final bool readonly;
   final double iconSize;
   final Color checkedColor;
+  final Color? checkedBorderColor;
+  final Color? iconCheckedColor;
+  final Color? uncheckBgColor;
+  final Color? checkBorderColor;
   final Function(bool value)? onChange;
 
   NCheckbox(
@@ -23,6 +27,10 @@ class NCheckbox extends StatefulWidget {
       this.readonly: false,
       this.iconSize: Style.checkboxSize,
       this.checkedColor: Style.checkboxCheckedIconColor,
+      this.checkedBorderColor,
+      this.iconCheckedColor,
+      this.uncheckBgColor,
+      this.checkBorderColor,
       this.onChange})
       : assert(["round", "square"].indexOf(shape) > -1,
             "shape must be round, or square"),
@@ -39,15 +47,15 @@ class _NCheckbox extends State<NCheckbox> {
         ? Style.checkboxDisabledBackgroundColor
         : widget.value
             ? widget.checkedColor
-            : Style.checkboxBackgroundColor;
+            : (widget.uncheckBgColor??Style.checkboxBackgroundColor);
     Color borderColor = widget.disabled || !widget.value
-        ? Style.checkboxBorderColor
-        : widget.checkedColor;
+        ? (widget.checkBorderColor ?? Style.checkboxBorderColor)
+        : (widget.checkedBorderColor ?? widget.checkedColor);
     Color iconColor = widget.disabled
         ? (widget.value
             ? Style.checkboxDisabledIconColor
             : Style.checkboxDisabledBackgroundColor)
-        : Style.checkboxBackgroundColor;
+        : (widget.value ? widget.iconCheckedColor ?? Style.checkboxBackgroundColor : Style.checkboxBackgroundColor);
     return GestureDetector(
       onTap: () {
         if (widget.disabled || widget.readonly) return;

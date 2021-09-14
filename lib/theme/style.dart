@@ -263,8 +263,8 @@ class Style {
 
   // Checkbox
   static const checkboxSize = 20.0;
-  static const checkboxBackgroundColor = white;
-  static const checkboxBorderColor = gray5;
+  static const checkboxBackgroundColor = Colors.transparent;
+  static const checkboxBorderColor = Colors.transparent;
   static const checkboxLabelMargin = paddingXs;
   static const checkboxLabelColor = textColor;
   static const checkboxCheckedIconColor = blue;

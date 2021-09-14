@@ -37,26 +37,22 @@ class ContactUtils {
   }
 
   static Future<Contact> openContactForm(
-      {bool iOSLocalizedLabels = true,
-      bool androidLocalizedLabels = true}) async {
+      {bool iOSLocalizedLabels = true,}) async {
     await Permission.contacts.request();
     // Usage of the native device form for creating a Contact
     // Throws a error if the Form could not be open or the Operation is canceled by the User
     return await ContactsService.openContactForm(
-        iOSLocalizedLabels: iOSLocalizedLabels,
-        androidLocalizedLabels: androidLocalizedLabels);
+        iOSLocalizedLabels: iOSLocalizedLabels,);
   }
 
   static Future<Contact> openExistingContact(Contact contact,
-      {bool iOSLocalizedLabels = true,
-      bool androidLocalizedLabels = true}) async {
+      {bool iOSLocalizedLabels = true,}) async {
     await Permission.contacts.request();
     // Usage of the native device form for editing a Contact
     // The contact must have a valid identifier
     // Throws a error if the Form could not be open or the Operation is canceled by the User
     return await ContactsService.openExistingContact(contact,
-        iOSLocalizedLabels: iOSLocalizedLabels,
-        androidLocalizedLabels: androidLocalizedLabels);
+        iOSLocalizedLabels: iOSLocalizedLabels,);
   }
 
   static Future<Iterable<Contact>> getConcatsByDevice() async {
@@ -81,8 +77,7 @@ class ContactUtils {
         withThumbnails: withThumbnails,
         photoHighResolution: photoHighResolution,
         orderByGivenName: orderByGivenName,
-        iOSLocalizedLabels: iOSLocalizedLabels,
-        androidLocalizedLabels: androidLocalizedLabels);
+        iOSLocalizedLabels: iOSLocalizedLabels,);
     return _result;
   }
 
