@@ -14,7 +14,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   contacts_service: any
   dio: ^3.0.10
-  image_picker: ^0.8.2
+  image_picker: ^0.6.7+22
   flutter_datetime_picker: ^1.5.1
   # 汉字转拼音
   lpinyin: ^2.0.0
