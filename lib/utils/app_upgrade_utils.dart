@@ -9,9 +9,9 @@ import 'package:package_info/package_info.dart';
 
 class AppUpgradeUtils {
   static Future<AppInfo> getAppInfo() async {
-      AppInfo appInfo = await FlutterUpgrade.appInfo;
-      return appInfo;
-    }
+    AppInfo appInfo = await FlutterUpgrade.appInfo;
+    return appInfo;
+  }
   static void checkAppUpgrade(
     BuildContext context,
     String checkUrl, {

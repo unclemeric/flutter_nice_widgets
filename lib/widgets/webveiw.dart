@@ -8,13 +8,12 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_nice_widgets/flutter_nice_widgets.dart';
-import 'package:flutter_nice_widgets/utils/webview_utils.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class NWebView extends StatefulWidget {
   final String url;
   final Function(WebViewController webViewController)? onWebViewCreated;
-  final Function(int progress)? onProgress;
+  final Function(int progress, WebViewController webViewController)? onProgress;
   final List<JavascriptChannel>? javascriptChannels;
   final Function(NavigationRequest request)? navigationDelegate;
   final Function(String url)? onPageStarted;
@@ -37,6 +36,7 @@ class NWebView extends StatefulWidget {
 }
 
 class _NWebViewState extends State<NWebView> {
+  late WebViewController viewController;
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
   String _title = '正在加载...';
@@ -84,13 +84,14 @@ class _NWebViewState extends State<NWebView> {
           javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: (WebViewController webViewController) {
             _controller.complete(webViewController);
+            viewController = webViewController; // 获取到WebViewController对象给onProgress使用，当页面100%加载完成时往页面传参
             this._getTitleFromPage(webViewController);
             if (widget.onWebViewCreated != null)
               widget.onWebViewCreated!(webViewController);
           },
           onProgress: (int progress) {
             print("WebView is loading (progress : $progress%)");
-            if (widget.onProgress != null) widget.onProgress!(progress);
+            if (widget.onProgress != null) widget.onProgress!(progress, viewController);
           },
           javascriptChannels: <JavascriptChannel>{
             _toasterJavascriptChannel(context),
@@ -127,7 +128,7 @@ class _NWebViewState extends State<NWebView> {
       }),
     );
   }
-
+  
   JavascriptChannel _toasterJavascriptChannel(BuildContext context) {
     return JavascriptChannel(
       name: 'Toaster',
