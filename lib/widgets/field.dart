@@ -99,29 +99,29 @@ class Field extends StatefulWidget {
   // 文本样式
   final TextStyle? style;
 
-  Field({
+  const Field({
     Key? key,
     this.keyboardType,
     this.focusNode,
-    this.textInputAction: TextInputAction.done,
+    this.textInputAction = TextInputAction.done,
     this.label,
     this.placeholder,
     this.controller,
     this.maxLength,
-    this.disabled: false,
-    this.readonly: false,
-    this.require: false,
-    this.clearable: true,
-    this.autofocus: false,
+    this.disabled = false,
+    this.readonly = false,
+    this.require = false,
+    this.clearable = true,
+    this.autofocus = false,
     this.inputFormatters,
-    this.type: "text",
-    this.rows: 2,
-    this.showWordLimit: false,
-    this.error: false,
+    this.type = "text",
+    this.rows = 2,
+    this.showWordLimit = false,
+    this.error = false,
     this.errorMessage,
-    this.labelWidth: Style.fieldLabelWidth,
-    this.labelAlign: TextAlign.start,
-    this.inputAlign: TextAlign.start,
+    this.labelWidth = Style.fieldLabelWidth,
+    this.labelAlign = TextAlign.start,
+    this.inputAlign = TextAlign.start,
     this.leftIcon,
     this.clickLeft,
     this.rightIcon,
@@ -161,13 +161,13 @@ class _Field extends State<Field> {
   }
 
   Widget buildLeft() {
-    return Container(
+    return SizedBox(
       width: widget.labelWidth,
       height: Style.fieldMinHeight,
       child: Row(
         children: <Widget>[
           widget.require
-              ? Text("*",
+              ? const Text("*",
                   style: TextStyle(
                     fontSize: Style.fieldFontSize,
                     color: Style.fieldRequiredColor,
@@ -180,14 +180,14 @@ class _Field extends State<Field> {
                 )
               : Container(),
           widget.leftIcon != null
-              ? SizedBox(width: Style.intervalSm)
+              ? const SizedBox(width: Style.intervalSm)
               : Container(),
           widget.label != null
               ? Flexible(
                   child: Text("${widget.label}",
                       textAlign: widget.labelAlign,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontSize: Style.fieldFontSize)))
+                      style: const TextStyle(fontSize: Style.fieldFontSize)))
               : Container()
         ],
       ),
@@ -229,7 +229,7 @@ class _Field extends State<Field> {
               counterText: widget.type != "textarea" ? "" : null,
               border: InputBorder.none,
               errorText: widget.errorMessage,
-              errorStyle: TextStyle(
+              errorStyle: const TextStyle(
                   fontSize: Style.fieldErrorMessageTextSize,
                   color: Style.fieldRequiredColor),
             ),
@@ -240,7 +240,18 @@ class _Field extends State<Field> {
                 : Style.fieldInputTextColor,
             cursorWidth: Style.fieldInputCursorWidth,
             onChanged: (val) {
-              if (widget.onChange != null) widget.onChange!(val);
+              if (widget.onChange != null) {
+                widget.onChange!(val);
+                // widget.controller!.value = TextEditingValue(
+                //   text: widget.controller!.text,
+                //   selection: TextSelection.fromPosition(
+                //     TextPosition(
+                //       affinity: TextAffinity.downstream,
+                //       offset: widget.controller!.text.length,
+                //     ),
+                //   ),
+                // );
+              }
             },
             onTap: () {
               if (widget.onClick != null) widget.onClick!();
@@ -251,12 +262,12 @@ class _Field extends State<Field> {
   }
 
   Widget buildRight() {
-    return Container(
+    return SizedBox(
       height: Style.fieldMinHeight,
       child: Row(
         children: <Widget>[
           widget.type == "password"
-              ? SizedBox(width: Style.intervalMd)
+              ? const SizedBox(width: Style.intervalMd)
               : Container(),
           widget.type == "password"
               ? GestureDetector(
@@ -272,11 +283,11 @@ class _Field extends State<Field> {
                 )
               : Container(),
           widget.clearable && _isShowDelete
-              ? SizedBox(width: Style.intervalMd)
+              ? const SizedBox(width: Style.intervalMd)
               : Container(),
           widget.clearable && _isShowDelete
               ? GestureDetector(
-                  child: Icon(Icons.cancel,
+                  child: const Icon(Icons.cancel,
                       size: Style.fieldClearIconSize,
                       color: Style.fieldClearIconColor),
                   onTap: () {
@@ -286,7 +297,7 @@ class _Field extends State<Field> {
                 )
               : Container(),
           (widget.rightIcon != null || widget.right != null)
-              ? SizedBox(width: Style.intervalMd)
+              ? const SizedBox(width: Style.intervalMd)
               : Container(),
           (widget.rightIcon != null && widget.right == null)
               ? GestureDetector(

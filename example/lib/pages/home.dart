@@ -1,7 +1,6 @@
 import 'package:example/pages/webview.dart';
 
 import 'actionSheet.dart';
-import 'app_upgrade.dart';
 import 'checkbox.dart';
 import 'button.dart';
 import 'conctact.dart';
@@ -41,7 +40,6 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     List<MenuItem> items = [
-      MenuItem("App更新", AppUpgradePage()),
       MenuItem("webview", WebviewPage()),
       MenuItem("通讯录", NConcatPage()),
       MenuItem("按钮", DemoButton(title: '按钮',),),

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nice_widgets/flutter_nice_widgets.dart';
 
@@ -21,8 +22,8 @@ class _DemoField extends State<DemoField> {
 
   Widget title(String title) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
-      child: Text(title, style: TextStyle(fontSize: 14, color: Colors.grey)),
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+      child: Text(title, style: const TextStyle(fontSize: 14, color: Colors.grey)),
     );
   }
 
@@ -39,7 +40,7 @@ class _DemoField extends State<DemoField> {
   @override
   Widget build(BuildContext context) {
     return PageScaffold(
-      title: '${widget.title}',
+      title: widget.title,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,10 +52,14 @@ class _DemoField extends State<DemoField> {
                   placeholder: '请输入用户名',
                   controller: testInput1,
                   onChange: (val) {
-                    print("text changed: $val");
+                    if (kDebugMode) {
+                      print("text changed: $val");
+                    }
                   },
                   onSubmitted: (val) {
-                    print("submitted: $val");
+                    if (kDebugMode) {
+                      print("submitted: $val");
+                    }
                   },
                 )
               ],
@@ -70,7 +75,9 @@ class _DemoField extends State<DemoField> {
                 rightIcon: Icons.help_outline,
                 require: true,
                 clickRight: () async {
-                  print("Click Right!");
+                  if (kDebugMode) {
+                    print("Click Right!");
+                  }
                 },
               ),
               Field(
@@ -90,7 +97,9 @@ class _DemoField extends State<DemoField> {
                   controller: testInput4,
                   leftIcon: Icons.perm_identity,
                   clickLeft: () async {
-                    print("click left");
+                    if (kDebugMode) {
+                      print("click left");
+                    }
                   },
                 )
               ],
@@ -108,7 +117,9 @@ class _DemoField extends State<DemoField> {
                   onChange: (val) {
                     setState(() {
                       testInput5.text = val;
-                      print(val);
+                      if (kDebugMode) {
+                        print(val);
+                      }
                     });
                   },
                 ),
@@ -120,7 +131,9 @@ class _DemoField extends State<DemoField> {
                   maxLength: 11,
                   clearable: true,
                   onChange: (val) {
-                    print(isErrorPhone(mobile).toString() + 'PPPPPPPP');
+                    if (kDebugMode) {
+                      print('${isErrorPhone(mobile)}PPPPPPPP');
+                    }
                     setState(() {
                       mobile = val;
                     });
@@ -160,7 +173,7 @@ class _DemoField extends State<DemoField> {
                     showWordLimit: true),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
           ],
         ),
       ),

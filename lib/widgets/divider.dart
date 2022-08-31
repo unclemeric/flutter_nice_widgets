@@ -39,7 +39,7 @@ class _NDivider extends State<NDivider> {
 
   @override
   void initState() {
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       if (widget.child != null || widget.content != null) _onLayoutDone(_);
     });
     super.initState();

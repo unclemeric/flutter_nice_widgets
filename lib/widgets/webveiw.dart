@@ -134,7 +134,7 @@ class _NWebViewState extends State<NWebView> {
       name: 'Toaster',
       onMessageReceived: (JavascriptMessage message) {
         // ignore: deprecated_member_use
-        Scaffold.of(context).showSnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(message.message)),
         );
       },
@@ -223,7 +223,7 @@ class NavigationControls extends StatelessWidget {
             //             await controller.goForward();
             //           } else {
             //             // ignore: deprecated_member_use
-            //             Scaffold.of(context).showSnackBar(
+            //             ScaffoldMessenger.of(context).showSnackBar(
             //               const SnackBar(
             //                   content: Text("No forward history item")),
             //             );

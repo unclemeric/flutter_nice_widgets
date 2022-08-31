@@ -30,7 +30,7 @@ class WebviewUtils {
       WebViewController controller, BuildContext context) async {
     // Send a message with the user agent string to the Toaster JavaScript channel we registered
     // with the WebView.
-    String userAgent = await controller.evaluateJavascript(
+    String userAgent = await controller.runJavascriptReturningResult(
         'Toaster.postMessage("User Agent: " + navigator.userAgent);');
     return userAgent;
   }
@@ -38,7 +38,7 @@ class WebviewUtils {
   static Future<List<String>> listCookies(
       WebViewController controller, BuildContext context) async {
     final String cookies =
-        await controller.evaluateJavascript('document.cookie');
+        await controller.runJavascriptReturningResult('document.cookie');
     // ignore: deprecated_member_use
     if (cookies == null || cookies == '""') {
       return [];
@@ -48,13 +48,13 @@ class WebviewUtils {
 
   static void addToCache(WebViewController controller, String key, String value,
       {String storeName: "webviewCache"}) async {
-    await controller.evaluateJavascript(
+    await controller.runJavascript(
         'caches.open("$storeName"); localStorage["$key"] = "$value";');
   }
 
   static void listCache(
       WebViewController controller, BuildContext context) async {
-    await controller.evaluateJavascript('caches.keys()'
+    await controller.runJavascript('caches.keys()'
         '.then((cacheKeys) => JSON.stringify({"cacheKeys" : cacheKeys, "localStorage" : localStorage}))'
         '.then((caches) => Toaster.postMessage(caches))');
   }
@@ -62,8 +62,8 @@ class WebviewUtils {
   static void clearCache(
       WebViewController controller, BuildContext context) async {
     await controller.clearCache();
-    // ignore: deprecated_member_use
-    Scaffold.of(context).showSnackBar(const SnackBar(
+    // ignore: deprecated_member_use, use_build_context_synchronously
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
       content: Text("清除缓存成功."),
     ));
   }
@@ -74,8 +74,8 @@ class WebviewUtils {
     if (!hadCookies) {
       message = '清除Cookies成功';
     }
-    // ignore: deprecated_member_use
-    Scaffold.of(context).showSnackBar(SnackBar(
+    // ignore: deprecated_member_use, use_build_context_synchronously
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(message),
     ));
   }

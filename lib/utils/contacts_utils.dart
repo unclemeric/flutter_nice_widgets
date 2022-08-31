@@ -90,13 +90,13 @@ class ContactUtils {
     return Container(
       height: susHeight,
       width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.only(left: 16.0),
-      color: Color(0xFFF3F4F5),
+      padding: const EdgeInsets.only(left: 16.0),
+      color: const Color(0xFFF3F4F5),
       alignment: Alignment.centerLeft,
       child: Text(
-        '$tag',
+        tag,
         softWrap: false,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 14.0,
           color: Color(0xFF666666),
         ),
@@ -152,12 +152,12 @@ class ContactUtils {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(model.name),
-          SizedBox(
+          const SizedBox(
             height: 5.0,
           ),
           Text(
             model.phone!,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 13.0,
               color: Colors.black45,
             ),

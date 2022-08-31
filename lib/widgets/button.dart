@@ -7,6 +7,7 @@ enum NButtonSize {
   Normal,
   Large,
 }
+
 enum NButtonType {
   Default,
   Primary,
@@ -96,52 +97,52 @@ class NButton extends StatelessWidget {
       : super(key: key);
 
   final Map<NButtonSize, dynamic> sizes = {
-      NButtonSize.Mini: <String, dynamic>{
-        "fontSize": Style.buttonMiniFontSize,
-        "padding": EdgeInsets.symmetric(horizontal: 2,vertical: 2),
-      },
-      NButtonSize.Small: <String, dynamic>{
-        "fontSize": Style.buttonSmallFontSize,
-        "padding": EdgeInsets.symmetric(horizontal: 8,vertical: 6),
-      },
-      NButtonSize.Normal: <String, dynamic>{
-        "fontSize": Style.buttonDefaultFontSize,
-        "padding": EdgeInsets.symmetric(horizontal: 15,vertical:9),
-      },
-      NButtonSize.Large: <String, dynamic>{
-        "fontSize": Style.buttonLargeFontSize,
-        "padding": EdgeInsets.symmetric(horizontal: 24,vertical: 12),
-      },
-    };
+    NButtonSize.Mini: <String, dynamic>{
+      "fontSize": Style.buttonMiniFontSize,
+      "padding": const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+    },
+    NButtonSize.Small: <String, dynamic>{
+      "fontSize": Style.buttonSmallFontSize,
+      "padding": const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+    },
+    NButtonSize.Normal: <String, dynamic>{
+      "fontSize": Style.buttonDefaultFontSize,
+      "padding": const EdgeInsets.symmetric(horizontal: 15, vertical: 9),
+    },
+    NButtonSize.Large: <String, dynamic>{
+      "fontSize": Style.buttonLargeFontSize,
+      "padding": const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+    },
+  };
 
-    // plain为false时才使用colors配置
-    final Map<NButtonType, dynamic> colors = {
-      NButtonType.Default: <String, Color>{
-        "buttonColor": Style.buttonDefaultBackgroundColor,
-        "borderColor": Style.buttonDefaultBorderColor,
-        "textColor": Style.buttonDefaultColor
-      },
-      NButtonType.Primary: <String, Color>{
-        "buttonColor": Style.buttonPrimaryBackgroundColor,
-        "borderColor": Style.buttonPrimaryBorderColor,
-        "textColor": Style.buttonPrimaryColor
-      },
-      NButtonType.Info: <String, Color>{
-        "buttonColor": Style.buttonInfoBackgroundColor,
-        "borderColor": Style.buttonInfoBorderColor,
-        "textColor": Style.buttonInfoColor
-      },
-      NButtonType.Danger: <String, Color>{
-        "buttonColor": Style.buttonDangerBackgroundColor,
-        "borderColor": Style.buttonDangerBorderColor,
-        "textColor": Style.buttonDangerColor
-      },
-      NButtonType.Warning: <String, Color>{
-        "buttonColor": Style.buttonWarningBackgroundColor,
-        "borderColor": Style.buttonWarningBorderColor,
-        "textColor": Style.buttonWarningColor
-      },
-    };
+  // plain为false时才使用colors配置
+  final Map<NButtonType, dynamic> colors = {
+    NButtonType.Default: <String, Color>{
+      "buttonColor": Style.buttonDefaultBackgroundColor,
+      "borderColor": Style.buttonDefaultBorderColor,
+      "textColor": Style.buttonDefaultColor
+    },
+    NButtonType.Primary: <String, Color>{
+      "buttonColor": Style.buttonPrimaryBackgroundColor,
+      "borderColor": Style.buttonPrimaryBorderColor,
+      "textColor": Style.buttonPrimaryColor
+    },
+    NButtonType.Info: <String, Color>{
+      "buttonColor": Style.buttonInfoBackgroundColor,
+      "borderColor": Style.buttonInfoBorderColor,
+      "textColor": Style.buttonInfoColor
+    },
+    NButtonType.Danger: <String, Color>{
+      "buttonColor": Style.buttonDangerBackgroundColor,
+      "borderColor": Style.buttonDangerBorderColor,
+      "textColor": Style.buttonDangerColor
+    },
+    NButtonType.Warning: <String, Color>{
+      "buttonColor": Style.buttonWarningBackgroundColor,
+      "borderColor": Style.buttonWarningBorderColor,
+      "textColor": Style.buttonWarningColor
+    },
+  };
 
   Widget buildContent() {
     Color? buttonColor;
@@ -158,7 +159,7 @@ class NButton extends StatelessWidget {
                 : colors[type]["textColor"])));
 
     return Container(
-      width: width ?? null,
+      width: width,
       height: height ?? sizes[size]["height"],
       padding: padding ?? sizes[size]["padding"],
       child: Row(
@@ -175,9 +176,9 @@ class NButton extends StatelessWidget {
                     strokeWidth: Style.borderWidthBase,
                   ),
                 )
-              : (icon != null ? icon : Container()) ?? Container(),
+              : (icon ?? Container()),
           (loading || icon != null) && text != null
-              ? SizedBox(width: Style.intervalSm)
+              ? const SizedBox(width: Style.intervalSm)
               : Container(),
           text != null
               ? Text(text!,
@@ -195,8 +196,11 @@ class NButton extends StatelessWidget {
     Color? borderColor;
     Color? buttonColor;
 
-    borderColor =
-        color is Gradient ? null : (this.hasBorder ? color ?? colors[type]["borderColor"] : Colors.transparent);
+    borderColor = color is Gradient
+        ? null
+        : (hasBorder
+            ? color ?? colors[type]["borderColor"]
+            : Colors.transparent);
     buttonColor = color is Gradient
         ? null
         : plain
@@ -205,48 +209,50 @@ class NButton extends StatelessWidget {
     return Opacity(
       opacity: disabled ? Style.buttonDisabledOpacity : 1.0,
       child: DecoratedBox(
-          decoration: BoxDecoration(
-              color: buttonColor ?? null,
-              gradient: color is Gradient ? color : null,
-              border: color is Gradient
-                  ? null
-                  : Border.all(
-                      color: borderColor!,
-                      width: hairline
-                          ? Style.buttonHairBorderWidth
-                          : Style.buttonBorderWidth),
-              borderRadius: borderRadius ??
-                  (square
-                      ? null
-                      : BorderRadius.circular(round
-                          ? Style.buttonRoundBorderRadius
-                          : Style.buttonBorderRadius))),
-          child: Material(
-            type: MaterialType.transparency,
-            child: InkWell(
-                focusColor: (disabled || loading)
-                    ? Style.transparent
-                    : Theme.of(context).focusColor,
-                highlightColor: (disabled || loading)
-                    ? Style.transparent
-                    : Theme.of(context).highlightColor,
-                hoverColor: (disabled || loading)
-                    ? Style.transparent
-                    : Theme.of(context).hoverColor,
-                splashColor: (disabled || loading)
-                    ? Style.transparent
-                    : Theme.of(context).splashColor,
-                borderRadius: borderRadius ??
-                    (square
-                        ? null
-                        : BorderRadius.circular(round
-                            ? Style.buttonRoundBorderRadius
-                            : Style.buttonBorderRadius)),
-                onTap: () {
-                  if (!disabled && !loading && onTap != null) onTap!();
-                },
-                child: buildContent()),
-          )),
+        decoration: BoxDecoration(
+            color: buttonColor,
+            gradient: color is Gradient ? color : null,
+            border: color is Gradient
+                ? null
+                : Border.all(
+                    color: borderColor!,
+                    width: hairline
+                        ? Style.buttonHairBorderWidth
+                        : Style.buttonBorderWidth),
+            borderRadius: borderRadius ??
+                (square
+                    ? null
+                    : BorderRadius.circular(round
+                        ? Style.buttonRoundBorderRadius
+                        : Style.buttonBorderRadius))),
+        child: Material(
+          type: MaterialType.transparency,
+          child: InkWell(
+            focusColor: (disabled || loading)
+                ? Style.transparent
+                : Theme.of(context).focusColor,
+            highlightColor: (disabled || loading)
+                ? Style.transparent
+                : Theme.of(context).highlightColor,
+            hoverColor: (disabled || loading)
+                ? Style.transparent
+                : Theme.of(context).hoverColor,
+            splashColor: (disabled || loading)
+                ? Style.transparent
+                : Theme.of(context).splashColor,
+            borderRadius: borderRadius ??
+                (square
+                    ? null
+                    : BorderRadius.circular(round
+                        ? Style.buttonRoundBorderRadius
+                        : Style.buttonBorderRadius)),
+            onTap: () {
+              if (!disabled && !loading && onTap != null) onTap!();
+            },
+            child: buildContent(),
+          ),
+        ),
+      ),
     );
   }
 }

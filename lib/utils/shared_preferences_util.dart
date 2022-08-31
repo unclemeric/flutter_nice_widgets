@@ -18,7 +18,7 @@ class PreferenceUtils {
     } else if (value is List) {
       await prefs.setStringList(key, value as List<String>);
     } else {
-      throw new Exception("不能得到这种类型");
+      throw Exception("不能得到这种类型");
     }
   }
 
@@ -36,7 +36,7 @@ class PreferenceUtils {
     } else if (defaultValue is List) {
       return prefs.getStringList(key);
     } else {
-      throw new Exception("不能得到这种类型");
+      throw Exception("不能得到这种类型");
     }
   }
 
