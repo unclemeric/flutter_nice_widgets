@@ -99,6 +99,16 @@ class Field extends StatefulWidget {
   // 文本样式
   final TextStyle? style;
 
+  final double fieldIconSize;
+
+  final double fieldFontSize;
+
+  final InputBorder? borderRadius;
+
+  final Color bgColor;
+
+  // final Color? fieldIconSize;
+
   const Field({
     Key? key,
     this.keyboardType,
@@ -133,6 +143,10 @@ class Field extends StatefulWidget {
     this.onSubmitted,
     this.onClick,
     this.style,
+    this.fieldIconSize = Style.fieldIconSize,
+    this.fieldFontSize = Style.fieldFontSize,
+    this.borderRadius,
+    this.bgColor = Style.fieldInputBackgroundColor
   }) : super(key: key);
 
   @override
@@ -167,15 +181,15 @@ class _Field extends State<Field> {
       child: Row(
         children: <Widget>[
           widget.require
-              ? const Text("*",
+              ? Text("*",
                   style: TextStyle(
-                    fontSize: Style.fieldFontSize,
+                    fontSize: widget.fieldFontSize,
                     color: Style.fieldRequiredColor,
                   ))
               : Container(),
           widget.leftIcon != null
               ? GestureDetector(
-                  child: Icon(widget.leftIcon, size: Style.fieldIconSize),
+                  child: Icon(widget.leftIcon, size: widget.fieldIconSize),
                   onTap: () => widget.clickLeft!(),
                 )
               : Container(),
@@ -187,7 +201,7 @@ class _Field extends State<Field> {
                   child: Text("${widget.label}",
                       textAlign: widget.labelAlign,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontSize: Style.fieldFontSize)))
+                      style: TextStyle(fontSize: widget.fieldFontSize)))
               : Container()
         ],
       ),
@@ -208,7 +222,7 @@ class _Field extends State<Field> {
             maxLines: widget.type == "textarea" ? widget.rows : 1,
             style: widget.style ??
                 TextStyle(
-                    fontSize: Style.fieldFontSize,
+                    fontSize: widget.fieldFontSize,
                     color: widget.error
                         ? Style.fieldInputErrorTextColor
                         : widget.disabled
@@ -224,10 +238,10 @@ class _Field extends State<Field> {
                 color: widget.error
                     ? Style.fieldInputErrorTextColor
                     : Style.fieldPlaceholderTextColor,
-                fontSize: Style.fieldFontSize,
+                fontSize: widget.fieldFontSize,
               ),
               counterText: widget.type != "textarea" ? "" : null,
-              border: InputBorder.none,
+              border:  widget.borderRadius ?? InputBorder.none,
               errorText: widget.errorMessage,
               errorStyle: const TextStyle(
                   fontSize: Style.fieldErrorMessageTextSize,
@@ -273,7 +287,7 @@ class _Field extends State<Field> {
               ? GestureDetector(
                   child: Icon(
                       _isShowPwd ? Icons.visibility_off : Icons.visibility,
-                      size: Style.fieldIconSize,
+                      size: widget.fieldIconSize,
                       color: Style.fieldRightIconColor),
                   onTap: () {
                     setState(() {
@@ -302,7 +316,7 @@ class _Field extends State<Field> {
           (widget.rightIcon != null && widget.right == null)
               ? GestureDetector(
                   child: Icon(widget.rightIcon,
-                      size: Style.fieldIconSize,
+                      size: widget.fieldIconSize,
                       color: Style.fieldRightIconColor),
                   onTap: () => widget.clickRight!(),
                 )
@@ -316,7 +330,7 @@ class _Field extends State<Field> {
   Widget build(BuildContext context) {
     return Container(
       padding: Style.fieldPadding,
-      color: Style.fieldInputBackgroundColor,
+      color: widget.bgColor,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
