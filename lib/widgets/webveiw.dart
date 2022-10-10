@@ -190,6 +190,9 @@ class NavigationControls extends StatelessWidget {
           (BuildContext context, AsyncSnapshot<WebViewController> snapshot) {
         final bool webViewReady =
             snapshot.connectionState == ConnectionState.done;
+        if(!webViewReady) {
+          return Container();
+        }
         final WebViewController controller = snapshot.data!;
         return Row(
           children: <Widget>[

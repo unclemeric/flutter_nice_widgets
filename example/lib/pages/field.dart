@@ -52,14 +52,10 @@ class _DemoField extends State<DemoField> {
                   placeholder: '请输入用户名',
                   controller: testInput1,
                   onChange: (val) {
-                    if (kDebugMode) {
-                      print("text changed: $val");
-                    }
+                    print("text changed: $val");
                   },
                   onSubmitted: (val) {
-                    if (kDebugMode) {
-                      print("submitted: $val");
-                    }
+                    print("submitted: $val");
                   },
                 )
               ],
@@ -75,9 +71,7 @@ class _DemoField extends State<DemoField> {
                 rightIcon: Icons.help_outline,
                 require: true,
                 clickRight: () async {
-                  if (kDebugMode) {
-                    print("Click Right!");
-                  }
+                  print("Click Right!");
                 },
               ),
               Field(
@@ -97,9 +91,7 @@ class _DemoField extends State<DemoField> {
                   controller: testInput4,
                   leftIcon: Icons.perm_identity,
                   clickLeft: () async {
-                    if (kDebugMode) {
-                      print("click left");
-                    }
+                    print("click left");
                   },
                 )
               ],
@@ -117,9 +109,7 @@ class _DemoField extends State<DemoField> {
                   onChange: (val) {
                     setState(() {
                       testInput5.text = val;
-                      if (kDebugMode) {
-                        print(val);
-                      }
+                      print(val);
                     });
                   },
                 ),
@@ -131,9 +121,7 @@ class _DemoField extends State<DemoField> {
                   maxLength: 11,
                   clearable: true,
                   onChange: (val) {
-                    if (kDebugMode) {
-                      print('${isErrorPhone(mobile)}PPPPPPPP');
-                    }
+                    print('${isErrorPhone(mobile)}PPPPPPPP');
                     setState(() {
                       mobile = val;
                     });
