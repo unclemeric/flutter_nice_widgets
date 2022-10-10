@@ -7,7 +7,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_nice_widgets/flutter_nice_widgets.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class NWebView extends StatefulWidget {
@@ -18,16 +17,18 @@ class NWebView extends StatefulWidget {
   final Function(NavigationRequest request)? navigationDelegate;
   final Function(String url)? onPageStarted;
   final Function(String url)? onPageFinished;
+  final bool showNavigation;
   final bool gestureNavigationEnabled;
   const NWebView(
       {Key? key,
       required this.url,
-      this.gestureNavigationEnabled: true,
+      this.gestureNavigationEnabled = true,
       this.javascriptChannels: const [],
       this.navigationDelegate,
       this.onPageFinished,
       this.onPageStarted,
       this.onProgress,
+      this.showNavigation = true,
       this.onWebViewCreated})
       : super(key: key);
 
@@ -69,15 +70,16 @@ class _NWebViewState extends State<NWebView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(_title),
-        leading: NavigationControls(_controller.future),
-        actions: <Widget>[
-          // SampleMenu(_controller.future),
-          // IconButton(onPressed: (){
-          //   controller.reload();
-          // }, icon: Icon(Icons.refresh)),
-          RightControls(_controller.future),
-        ],
+        leading: BackControls(_controller.future),
       ),
+      bottomNavigationBar: widget.showNavigation ? Container(
+        color: Colors.blueGrey.shade50,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+          NavigationControls(_controller.future),
+        ]),
+      ) : null,
       body: Builder(builder: (BuildContext context) {
         return WebView(
           initialUrl: widget.url,
@@ -85,9 +87,10 @@ class _NWebViewState extends State<NWebView> {
           onWebViewCreated: (WebViewController webViewController) {
             _controller.complete(webViewController);
             viewController = webViewController; // 获取到WebViewController对象给onProgress使用，当页面100%加载完成时往页面传参
-            this._getTitleFromPage(webViewController);
-            if (widget.onWebViewCreated != null)
+            _getTitleFromPage(webViewController);
+            if (widget.onWebViewCreated != null) {
               widget.onWebViewCreated!(webViewController);
+            }
           },
           onProgress: (int progress) {
             print("WebView is loading (progress : $progress%)");
@@ -142,43 +145,8 @@ class _NWebViewState extends State<NWebView> {
   }
 }
 
-class RightControls extends StatelessWidget {
-  const RightControls(this._webViewControllerFuture);
-
-  final Future<WebViewController> _webViewControllerFuture;
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<WebViewController>(
-      future: _webViewControllerFuture,
-      builder:
-          (BuildContext context, AsyncSnapshot<WebViewController> snapshot) {
-        final bool webViewReady =
-            snapshot.connectionState == ConnectionState.done;
-        final WebViewController controller = snapshot.data!;
-        return Row(
-          children: <Widget>[
-            NButton(
-              type: NButtonType.Default,
-              plain: true,
-              text: '刷新',
-              textColor: Colors.white,
-              hasBorder: false,
-              onTap: !webViewReady
-                  ? null
-                  : () {
-                      controller.reload();
-                    },
-            ),
-          ],
-        );
-      },
-    );
-  }
-}
-
-class NavigationControls extends StatelessWidget {
-  const NavigationControls(this._webViewControllerFuture, {super.key});
+class BackControls extends StatelessWidget {
+  const BackControls(this._webViewControllerFuture, {super.key});
 
   final Future<WebViewController> _webViewControllerFuture;
 
@@ -193,7 +161,6 @@ class NavigationControls extends StatelessWidget {
         if(!webViewReady) {
           return Container();
         }
-        final WebViewController controller = snapshot.data!;
         return Row(
           children: <Widget>[
             IconButton(
@@ -202,46 +169,69 @@ class NavigationControls extends StatelessWidget {
                   : Icons.arrow_back_ios_new),
               onPressed: !webViewReady
                   ? null
-                  : () async {
-                      try {
-                        if (await controller.canGoBack()) {
-                          await controller.goBack();
-                        } else {
-                          if (Navigator.canPop(context)) {
-                            Navigator.pop(context);
-                          }
-                          return;
-                        }
-                      } catch (e) {
+                  : () {
+                      if (Navigator.canPop(context)) {
                         Navigator.pop(context);
                       }
                     },
             ),
-            // IconButton(
-            //   icon: const Icon(Icons.arrow_forward_ios),
-            //   onPressed: !webViewReady
-            //       ? null
-            //       : () async {
-            //           if (await controller.canGoForward()) {
-            //             await controller.goForward();
-            //           } else {
-            //             // ignore: deprecated_member_use
-            //             ScaffoldMessenger.of(context).showSnackBar(
-            //               const SnackBar(
-            //                   content: Text("No forward history item")),
-            //             );
-            //             return;
-            //           }
-            //         },
-            // ),
-            // IconButton(
-            //   icon: const Icon(Icons.replay),
-            //   onPressed: !webViewReady
-            //       ? null
-            //       : () {
-            //           controller.reload();
-            //         },
-            // ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class NavigationControls extends StatelessWidget {
+  const NavigationControls(this._webViewControllerFuture, {Key? key})
+      : assert(_webViewControllerFuture != null),
+        super(key: key);
+
+  final Future<WebViewController> _webViewControllerFuture;
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<WebViewController>(
+      future: _webViewControllerFuture,
+      builder:
+          (BuildContext context, AsyncSnapshot<WebViewController> snapshot) {
+        final bool webViewReady =
+            snapshot.connectionState == ConnectionState.done;
+        final WebViewController? controller = snapshot.data;
+        return Row(
+          children: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.arrow_back_ios),
+              onPressed: !webViewReady
+                  ? null
+                  : () async {
+                      if (await controller!.canGoBack()) {
+                        await controller.goBack();
+                      }
+                      return;
+                    },
+            ),
+            const SizedBox(width: 50),
+            IconButton(
+              icon: const Icon(Icons.arrow_forward_ios),
+              onPressed: !webViewReady
+                  ? null
+                  : () async {
+                      if (await controller!.canGoForward()) {
+                        await controller.goForward();
+                      }
+                      return;
+                    },
+            ),
+            const SizedBox(width: 50),
+            IconButton(
+              icon: const Icon(Icons.replay),
+              onPressed: !webViewReady
+                  ? null
+                  : () {
+                      controller!.reload();
+                    },
+            ),
           ],
         );
       },

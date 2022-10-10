@@ -19,14 +19,14 @@ class WebviewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NWebView(url: 'http://192.168.43.124:8080/',
+    return NWebView(url: 'https://www.baidu.com/',
       onWebViewCreated: (WebViewController webViewController){
         // when webview created do something
       },
       onProgress: (progress, viewController){
         if(progress == 100){
           String script = 'window.isLogin="yes";window.getInfo("是否登录")';
-          viewController.evaluateJavascript(script).then((result){
+          viewController.runJavascriptReturningResult(script).then((result){
             print(result.toString()); // 接收script中window.getInfo返回值
           });
         }
