@@ -52,14 +52,14 @@ class _NWebViewState extends State<NWebView> {
     // });
     Future.delayed(const Duration(milliseconds: 500), () async {
       String title =
-          await webViewController.evaluateJavascript("document.title");
+          await webViewController.runJavascriptReturningResult("document.title");
       title = title.replaceAll("\"", ""); // 安卓获取的标题自带双引号需要手动去除，ios没这个问题
       if (title.isNotEmpty) {
-        this.setState(() {
-          this._title = title;
+        setState(() {
+          _title = title;
         });
       } else {
-        this._getTitleFromPage(webViewController);
+        _getTitleFromPage(webViewController);
       }
     });
   }
@@ -178,7 +178,7 @@ class RightControls extends StatelessWidget {
 }
 
 class NavigationControls extends StatelessWidget {
-  const NavigationControls(this._webViewControllerFuture);
+  const NavigationControls(this._webViewControllerFuture, {super.key});
 
   final Future<WebViewController> _webViewControllerFuture;
 
