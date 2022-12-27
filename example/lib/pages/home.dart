@@ -1,5 +1,3 @@
-import 'package:example/pages/webview.dart';
-
 import 'actionSheet.dart';
 import 'checkbox.dart';
 import 'button.dart';
@@ -40,7 +38,6 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     List<MenuItem> items = [
-      MenuItem("webview", WebviewPage()),
       MenuItem("通讯录", NConcatPage()),
       MenuItem("按钮", DemoButton(title: '按钮',),),
       MenuItem("复选框", CheckboxPage(title: '复选框',),),
