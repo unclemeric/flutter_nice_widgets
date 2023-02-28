@@ -62,7 +62,7 @@ class ActionSheetState extends StatelessWidget {
   List<Widget> buildActionSheetItemContent(ActionSheetItem action) {
     return [
       action.loading
-          ? SizedBox(
+          ? const SizedBox(
               width: Style.actionSheetItemFontSize,
               height: Style.actionSheetItemFontSize,
               child: CircularProgressIndicator(
@@ -81,7 +81,7 @@ class ActionSheetState extends StatelessWidget {
                   : action.color)),
       SizedBox(width: action.subname != null ? Style.intervalSm : 0),
       Text(action.subname ?? "",
-          style: TextStyle(
+          style: const TextStyle(
               fontSize: Style.actionSheetSubnameFontSize,
               color: Style.actionSheetSubnameColor))
     ];
@@ -95,7 +95,7 @@ class ActionSheetState extends StatelessWidget {
       widgets.add(Column(
         children: <Widget>[
           DecoratedBox(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Style.actionSheetItemBackground,
               ),
               child: Material(
@@ -113,7 +113,7 @@ class ActionSheetState extends StatelessWidget {
                   splashColor: (action.disabled || action.loading)
                       ? Style.transparent
                       : Theme.of(context).splashColor,
-                  child: Container(
+                  child: SizedBox(
                     height: Style.actionSheetItemHeight,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -122,8 +122,9 @@ class ActionSheetState extends StatelessWidget {
                   ),
                   onTap: () {
                     if (action.loading || action.disabled) return;
-                    if (actionSheet.onSelect != null)
+                    if (actionSheet.onSelect != null) {
                       actionSheet.onSelect!(action, i, context);
+                    }
                     close(context);
                   },
                 ),
@@ -147,14 +148,14 @@ class ActionSheetState extends StatelessWidget {
                 children: <Widget>[
                   actionSheet.title != null
                       ? Text(actionSheet.title!,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: Style.actionSheetHeaderFontSize,
                               fontWeight: FontWeight.bold))
                       : Container(),
-                  SizedBox(height: Style.intervalSm),
+                  const SizedBox(height: Style.intervalSm),
                   actionSheet.description != null
                       ? Text(actionSheet.description!,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: Style.actionSheetDescriptionFontSize,
                               color: Style.actionSheetDescriptionColor))
                       : Container(),
@@ -165,7 +166,7 @@ class ActionSheetState extends StatelessWidget {
               right: 0,
               top: 0,
               child: Padding(
-                padding: EdgeInsets.all(Style.actionSheetCloseIconPadding),
+                padding: const EdgeInsets.all(Style.actionSheetCloseIconPadding),
                 child: GestureDetector(
                   onTap: () {
                     close(context);
@@ -191,7 +192,7 @@ class ActionSheetState extends StatelessWidget {
             height: Style.actionSheetCancelPaddingTop,
             color: Style.actionSheetCancelPaddingColor),
         DecoratedBox(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Style.actionSheetItemBackground,
           ),
           child: Material(
@@ -201,7 +202,7 @@ class ActionSheetState extends StatelessWidget {
                 alignment: AlignmentDirectional.center,
                 height: Style.actionSheetItemHeight,
                 child: Text(actionSheet.cancelText!,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: Style.actionSheetItemFontSize,
                         color: Style.actionSheetItemTextColor)),
               ),
@@ -264,7 +265,7 @@ class ActionSheetItem {
   ActionSheetItem(
       {this.name,
       this.subname,
-      this.color: Colors.black,
-      this.loading: false,
-      this.disabled: false});
+      this.color = Colors.black,
+      this.loading = false,
+      this.disabled = false});
 }

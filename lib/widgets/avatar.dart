@@ -21,17 +21,17 @@ class Avatar extends StatelessWidget {
 
   Avatar(
       {Key? key,
-      this.type: 'normal',
+      this.type = 'normal',
       this.size,
-      this.shape: 'round',
+      this.shape = 'round',
       this.color,
       this.iconColor,
       this.custom,
       this.image,
       this.onClick})
-      : assert(["small", "normal", "large"].indexOf(type) > -1,
+      : assert(["small", "normal", "large"].contains(type),
             "type must be small, normal, or large"),
-        assert(["round", "square"].indexOf(shape) > -1,
+        assert(["round", "square"].contains(shape),
             "shape must be round, or square"),
         super(key: key);
 

@@ -23,10 +23,8 @@ class Style {
   static const primaryColor = Colors.blue;
 
   // Gradient Colors
-  static const gradientRed =
-      LinearGradient(colors: [Color(0xffff6034), Color(0xffee0a24)]);
-  static const gradientOrange =
-      LinearGradient(colors: [Color(0xffffd01e), Color(0xffff8917)]);
+  static const gradientRed = LinearGradient(colors: [Color(0xffff6034), Color(0xffee0a24)]);
+  static const gradientOrange = LinearGradient(colors: [Color(0xffffd01e), Color(0xffff8917)]);
 
   // Component Colors
   static const textColor = gray8;
@@ -84,8 +82,7 @@ class Style {
   static const borderRadiusMax = 999.0;
 
   // ActionSheet
-  static const actionSheetHeaderPadding =
-      EdgeInsets.symmetric(horizontal: 20, vertical: 10);
+  static const actionSheetHeaderPadding = EdgeInsets.symmetric(horizontal: 20, vertical: 10);
   static const actionSheetHeaderFontSize = fontSizeLg;
   static const actionSheetHeaderBorderRadius = 20.0;
   static const actionSheetDescriptionColor = gray7;
@@ -105,8 +102,7 @@ class Style {
 
   // AddressEdit
   static const addressEditPadding = paddingSm;
-  static const addressEditButtonsPadding =
-      EdgeInsets.symmetric(vertical: paddingXl, horizontal: paddingBase);
+  static const addressEditButtonsPadding = EdgeInsets.symmetric(vertical: paddingXl, horizontal: paddingBase);
   static const addressEditButtonMarginBottom = paddingSm;
   static const addressEditSwitchHeight = 20.0;
   static const addressEditSwitchColor = blue;
@@ -114,8 +110,7 @@ class Style {
   // AddressList
   static const addressListPadding = EdgeInsets.all(paddingSm);
   static const addressListDisabledTextColor = gray6;
-  static const addressListDisabledTextPadding =
-      EdgeInsets.symmetric(vertical: paddingLg);
+  static const addressListDisabledTextPadding = EdgeInsets.symmetric(vertical: paddingLg);
   static const addressListDisabledTextFontSize = fontSizeMd;
   static const addressListTitleFontSize = fontSizeLg;
   static const addressListItemPadding = EdgeInsets.all(paddingSm);
@@ -127,8 +122,7 @@ class Style {
   static const addressListItemRadioIconFontSize = 20.0;
   static const addressListEditIconSize = 18.0;
   static const addressListEditIconColor = gray6;
-  static const addressListAddPadding =
-      EdgeInsets.symmetric(vertical: paddingSm, horizontal: paddingSm);
+  static const addressListAddPadding = EdgeInsets.symmetric(vertical: paddingSm, horizontal: paddingSm);
   static const addressListAddBackground = white;
 
   // Avatar
@@ -142,8 +136,7 @@ class Style {
 
   // Badge
   static const badgeDotPadding = 5.0;
-  static const badgeValuePadding =
-      EdgeInsets.symmetric(vertical: 2.0, horizontal: paddingBase);
+  static const badgeValuePadding = EdgeInsets.symmetric(vertical: 2.0, horizontal: paddingBase);
   static const badgeTextColor = white;
   static const badgeBackgroundColor = red;
   static const badgeTextFontSize = 12.0;
@@ -220,13 +213,11 @@ class Style {
   static const calendarInfoFontSize = fontSizeXs;
   static const calendarSelectedDayBackgroundColor = blue;
   static const calendarDayDisabledColor = gray5;
-  static const calendarConfirmPadding =
-      EdgeInsets.symmetric(vertical: 7.0, horizontal: paddingMd);
+  static const calendarConfirmPadding = EdgeInsets.symmetric(vertical: 7.0, horizontal: paddingMd);
   static const calendarConfirmButtonHeight = 36.0;
 
   // Card
-  static const cardPadding =
-      EdgeInsets.symmetric(vertical: paddingSm, horizontal: paddingMd);
+  static const cardPadding = EdgeInsets.symmetric(vertical: paddingSm, horizontal: paddingMd);
   static const cardFontSize = fontSizeSm;
   static const cardTextColor = textColor;
   static const cardBackgroundColor = white;
@@ -257,14 +248,13 @@ class Style {
   // CellGroup
   static const cellGroupBackgroundColor = white;
   static const cellGroupTitleColor = gray6;
-  static const cellGroupTitlePadding = EdgeInsets.only(
-      left: paddingMd, top: paddingMd, right: paddingMd, bottom: paddingXs);
+  static const cellGroupTitlePadding = EdgeInsets.only(left: paddingMd, top: paddingMd, right: paddingMd, bottom: paddingXs);
   static const cellGroupTitleFontSize = fontSizeMd;
 
   // Checkbox
   static const checkboxSize = 20.0;
-  static const checkboxBackgroundColor = Colors.transparent;
-  static const checkboxBorderColor = Colors.transparent;
+  static const checkboxBackgroundColor = Colors.white;
+  static const checkboxBorderColor = Colors.black12;
   static const checkboxLabelMargin = paddingXs;
   static const checkboxLabelColor = textColor;
   static const checkboxCheckedIconColor = blue;
@@ -279,8 +269,7 @@ class Style {
 
   // Collapse
   static const collapseItemTransitionDuration = animationDurationBase;
-  static const collapseItemContentPadding =
-      EdgeInsets.fromLTRB(0, paddingMd, paddingMd, paddingMd);
+  static const collapseItemContentPadding = EdgeInsets.fromLTRB(0, paddingMd, paddingMd, paddingMd);
   static const collapseItemContentMargin = EdgeInsets.only(left: paddingMd);
   static const collapseItemContentFontSize = 13.0;
   static const collapseItemContentTextColor = gray6;
@@ -311,8 +300,7 @@ class Style {
 
   // Coupon
   static const couponMargin = EdgeInsets.only(bottom: paddingMd);
-  static const couponContentPadding =
-      EdgeInsets.fromLTRB(paddingMd, paddingMd, paddingMd, paddingLg);
+  static const couponContentPadding = EdgeInsets.fromLTRB(paddingMd, paddingMd, paddingMd, paddingLg);
   static const couponBackgroundColor = white;
   static const couponBorderRadius = borderRadiusMd;
   static const couponBoxShadow = boxShadow;
@@ -326,8 +314,7 @@ class Style {
   static const couponNameFontSize = 20.0;
   static const couponNameColor = textColor;
   static const couponDisabledTextColor = gray6;
-  static const couponDescriptionPadding =
-      EdgeInsets.symmetric(vertical: paddingXs, horizontal: paddingMd);
+  static const couponDescriptionPadding = EdgeInsets.symmetric(vertical: paddingXs, horizontal: paddingMd);
   static const couponDescriptionBackgroundColor = backgroundColorLight;
   static const couponDescriptionFontSize = fontSizeSm;
   static const couponDescriptionColor = gray6;
@@ -356,8 +343,7 @@ class Style {
   static const dialogTextColor = textColor;
   static const dialogBackgroundColor = white;
   static const dialogHeaderFontWeight = fontWeightBold;
-  static const dialogHeaderPadding =
-      EdgeInsets.fromLTRB(paddingLg, paddingLg, paddingLg, 0);
+  static const dialogHeaderPadding = EdgeInsets.fromLTRB(paddingLg, paddingLg, paddingLg, 0);
   static const dialogMessagePadding = paddingLg;
   static const dialogMessageFontSize = fontSizeMd;
   static const dialogHasTitleMessageTextColor = gray7;
@@ -381,8 +367,7 @@ class Style {
   static const dropdownMenuTitleTextColor = textColor;
   static const dropdownMenuTitleActiveTextColor = blue;
   static const dropdownMenuTitleDisabledTextColor = gray6;
-  static const dropdownMenuTitlePadding =
-      EdgeInsets.symmetric(horizontal: paddingXs);
+  static const dropdownMenuTitlePadding = EdgeInsets.symmetric(horizontal: paddingXs);
   static const dropdownMenuOptionActiveColor = white;
   static const dropdownMenuContentMaxHeight = 200.0;
 
@@ -390,8 +375,7 @@ class Style {
   static const fieldLabelWidth = 80.0;
   static const fieldMinHeight = 30.0;
   static const fieldFontSize = fontSizeMd;
-  static const fieldPadding =
-      EdgeInsets.symmetric(horizontal: paddingMd, vertical: 10);
+  static const fieldPadding = EdgeInsets.symmetric(horizontal: paddingMd, vertical: 10);
   static const fieldInputPadding = EdgeInsets.symmetric(vertical: 5);
   static const fieldInputBackgroundColor = white;
   static const fieldInputTextColor = textColor;
@@ -417,8 +401,7 @@ class Style {
   static const goodsActionIconSize = 18.0;
   static const goodsActionFontSize = fontSizeXs;
   static const goodsActionIconTextColor = gray7;
-  static const goodsActionButtonsPadding =
-      EdgeInsets.symmetric(vertical: paddingXs, horizontal: paddingSm);
+  static const goodsActionButtonsPadding = EdgeInsets.symmetric(vertical: paddingXs, horizontal: paddingSm);
   static const goodsActionButtonHeight = 40.0;
 
   // ImagePreview
@@ -458,18 +441,16 @@ class Style {
 
   // NoticeBar
   static const noticeBarHeight = 40.0;
-  static const noticeBarPadding =
-      EdgeInsets.symmetric(vertical: paddingXs, horizontal: paddingMd);
+  static const noticeBarPadding = EdgeInsets.symmetric(vertical: paddingXs, horizontal: paddingMd);
   static const noticeBarFontSize = fontSizeMd;
   static const noticeBarTextColor = orangeDark;
   static const noticeBarBackgroundColor = orangeLight;
   static const noticeBarIconSize = 16.0;
 
-  // NumberKeyBoard
+  // NumberKeyboard
   static const numberKeyboardBackgroundColor = white;
   static const numberKeyboardTitleTextColor = gray7;
-  static const numberKeyboardTitlePadding =
-      EdgeInsets.symmetric(vertical: paddingXs, horizontal: paddingMd);
+  static const numberKeyboardTitlePadding = EdgeInsets.symmetric(vertical: paddingXs, horizontal: paddingMd);
   static const numberKeyboardTitleFontSize = fontSizeMd;
   static const numberKeyboardCloseColor = blue;
   static const numberKeyboardCloseFontSize = fontSizeMd;
@@ -495,13 +476,11 @@ class Style {
   static const panelHeaderValueFontSize = fontSizeMd;
   static const panelHeaderValueColor = red;
   static const panelContentPadding = 20.0;
-  static const panelFooterPadding =
-      EdgeInsets.symmetric(vertical: paddingXs, horizontal: paddingMd);
+  static const panelFooterPadding = EdgeInsets.symmetric(vertical: paddingXs, horizontal: paddingMd);
 
   // PasswordInput
   static const passwordInputHeight = 52.0;
-  static const passwordInputMargin =
-      EdgeInsets.symmetric(horizontal: paddingMd);
+  static const passwordInputMargin = EdgeInsets.symmetric(horizontal: paddingMd);
   static const passwordInputFontSize = 20.0;
   static const passwordInputColor = textColor;
   static const passwordInputGutter = 6.0;
@@ -513,8 +492,7 @@ class Style {
   // Search
   static const searchBackgroundColor = white;
   static const searchInputBackgroundColor = gray1;
-  static const searchPadding =
-      EdgeInsets.symmetric(vertical: 10, horizontal: paddingSm);
+  static const searchPadding = EdgeInsets.symmetric(vertical: 10, horizontal: paddingSm);
   static const searchInputFontSize = fontSizeMd;
   static const searchInputPlaceholderColor = gray6;
   static const searchInputColor = textColor;
@@ -590,8 +568,7 @@ class Style {
   static const submitBarPriceFontSize = 20.0;
   static const submitBarTextColor = textColor;
   static const submitBarTextFontSize = fontSizeMd;
-  static const submitBarTipPadding =
-      EdgeInsets.symmetric(vertical: paddingXs, horizontal: paddingSm);
+  static const submitBarTipPadding = EdgeInsets.symmetric(vertical: paddingXs, horizontal: paddingSm);
   static const submitBarTipFontSize = fontSizeSm;
   static const submitBarTipColor = Color(0xfff56723);
   static const submitBarTipBackgroundColor = Color(0xfffff7cc);
@@ -608,7 +585,7 @@ class Style {
   static const swipeDuration = animationDurationSlow;
 
   // Tag
-  static const tagPadding = EdgeInsets.symmetric(horizontal: paddingBase,vertical: 2.0);
+  static const tagPadding = EdgeInsets.symmetric(horizontal: paddingBase, vertical: 2.0);
   static const tagMargin = EdgeInsets.only(right: intervalLg);
   static const tagFontSize = fontSizeSm;
   static const tagMediumFontSize = fontSizeMd;

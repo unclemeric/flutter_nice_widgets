@@ -21,8 +21,8 @@ class _DemoButton extends State<DemoButton> {
 
   Widget title(String title) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 20),
-      child: Text(title, style: TextStyle(fontSize: 14, color: Colors.grey)),
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: Text(title, style: const TextStyle(fontSize: 14, color: Colors.grey)),
     );
   }
 
@@ -31,7 +31,7 @@ class _DemoButton extends State<DemoButton> {
     return PageScaffold(
       title: '${widget.title}',
       body: SingleChildScrollView(
-          padding: EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -151,7 +151,7 @@ class _DemoButton extends State<DemoButton> {
                         _loading = true;
                       });
                       int count = 2;
-                      _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+                      _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
                         setState(() {
                           if (count < 1) {
                             _timer.cancel();
@@ -204,14 +204,14 @@ class _DemoButton extends State<DemoButton> {
                 children: <Widget>[
                   NButton(
                     icon:
-                        Icon(Icons.star_border, color: Colors.white, size: 18),
+                        const Icon(Icons.star_border, color: Colors.white, size: 18),
                     type: NButtonType.Primary,
                     onTap: () {},
                   ),
                   NButton(
                     text: 'button',
                     icon:
-                        Icon(Icons.star_border, color: Colors.white, size: 18),
+                        const Icon(Icons.star_border, color: Colors.white, size: 18),
                     type: NButtonType.Primary,
                     onTap: () {},
                   ),
@@ -284,7 +284,7 @@ class _DemoButton extends State<DemoButton> {
                   ),
                   NButton(
                     text: 'gradient_button',
-                    color: LinearGradient(
+                    color: const LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [Colors.greenAccent, Colors.redAccent]),
@@ -299,7 +299,7 @@ class _DemoButton extends State<DemoButton> {
                   ),
                 ],
               ),
-              SizedBox(height: 20)
+              const SizedBox(height: 20)
             ],
           )),
       padding: true,

@@ -15,7 +15,7 @@ class TakePhotoUtil {
     File? _image;
     ImagePicker? picker = ImagePicker();
     final pickedFile =
-        await picker.getImage(source: source, imageQuality: imageQuality);
+        await picker.pickImage(source: source, imageQuality: imageQuality);
     // ignore: unnecessary_null_comparison
     if (pickedFile != null) {
       _image = File(pickedFile.path);

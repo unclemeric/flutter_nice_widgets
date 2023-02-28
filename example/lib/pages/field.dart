@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nice_widgets/flutter_nice_widgets.dart';
 
@@ -21,8 +22,8 @@ class _DemoField extends State<DemoField> {
 
   Widget title(String title) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
-      child: Text(title, style: TextStyle(fontSize: 14, color: Colors.grey)),
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+      child: Text(title, style: const TextStyle(fontSize: 14, color: Colors.grey)),
     );
   }
 
@@ -39,7 +40,7 @@ class _DemoField extends State<DemoField> {
   @override
   Widget build(BuildContext context) {
     return PageScaffold(
-      title: '${widget.title}',
+      title: widget.title,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,7 +121,7 @@ class _DemoField extends State<DemoField> {
                   maxLength: 11,
                   clearable: true,
                   onChange: (val) {
-                    print(isErrorPhone(mobile).toString() + 'PPPPPPPP');
+                    print('${isErrorPhone(mobile)}PPPPPPPP');
                     setState(() {
                       mobile = val;
                     });
@@ -160,7 +161,7 @@ class _DemoField extends State<DemoField> {
                     showWordLimit: true),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
           ],
         ),
       ),

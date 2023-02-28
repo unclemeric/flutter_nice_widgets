@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class DateTimePickerUtil {
-  static DatePickerTheme datePickerTheme = DatePickerTheme(
+  static DatePickerTheme datePickerTheme = const DatePickerTheme(
     headerColor: Colors.white,
     backgroundColor: Colors.white,
     itemStyle: TextStyle(
