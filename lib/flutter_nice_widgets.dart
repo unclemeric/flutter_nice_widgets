@@ -13,7 +13,7 @@ export 'widgets/empty.dart';
 export './widgets/field.dart';
 export './widgets/imagePreview.dart';
 export './widgets/loading.dart';
-export './widgets/numberKeyBoard.dart';
+export './widgets/numberKeyboard.dart';
 export './widgets/passwordInput.dart';
 export './widgets/radioGroup.dart';
 export './widgets/scaffold.dart';
